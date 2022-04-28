@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class Perso : MonoBehaviour
 {
     private bool enDeplacement = false;
+    public bool plongee = false;
     //Mouvement debut de jeu du perso, se deplace de gauche a droite
-    private IEnumerator DeplacementDebut()
+    public IEnumerator DeplacementDebut()
     {
         GameObject textGO = GameObject.FindGameObjectWithTag("CompteDebutJeu");
         Text texte = textGO.GetComponent<Text>();
@@ -19,6 +20,7 @@ public class Perso : MonoBehaviour
         yield return new WaitForSeconds(1f);
         textGO.SetActive(false);
         Debut();
+        plongee = true;
     }
     //Jouer animation de plongeon atao rehefa premiere click ecran de go
     private void Debut()
@@ -29,7 +31,7 @@ public class Perso : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DeplacementDebut());
+       // StartCoroutine(DeplacementDebut());
         
     }
 
