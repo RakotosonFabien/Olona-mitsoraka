@@ -7,9 +7,11 @@ public class CameraFollow : MonoBehaviour
     public SpriteRenderer fond;
     public Transform target;
     public Vector3 offset;
+    public Vector3 premiereDistance;
     // Start is called before the first frame update
     void Start()
     {
+        premiereDistance = new Vector3(0, this.transform.position.y - target.transform.position.y, 0);
         float orthoSize = fond.bounds.size.x * Screen.height / Screen.width * 0.5f;
         Camera.main.orthographicSize = orthoSize;
     }
@@ -17,7 +19,6 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //avy eo avadika manaraka anle camera seulement apres premiere fois tonga eo @ milieu
-        transform.position = target.position + offset;
+        transform.position = target.position + offset + premiereDistance;
     }
 }

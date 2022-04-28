@@ -7,7 +7,7 @@ public class Gameplay : MonoBehaviour
     public Camera cameraFollow;
     public GameObject fond;
     public GameObject perso;
-    public GameObject[] obstacles;
+    public GameObject obstacles;
     public GameObject depart;
     public GameObject[] ors;
     public GameObject[] objets;
