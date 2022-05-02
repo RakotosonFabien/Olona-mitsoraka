@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fond : MonoBehaviour
+public class GenObstacle : MonoBehaviour
 {
-    public Perso perso;
-    public GameObject cameraFollow;
     public GameObject obstaclePrefab;
     public float timerObstacle = 0.5f;
     public Vector2 screenBounds;
-    //Creation obstacle
+    public GameObject perso;
+    //Creation obstacles
     private void CreerObstacle()
     {
         GameObject gamePlay = GameObject.FindGameObjectWithTag("GamePlay");
@@ -18,24 +17,25 @@ public class Fond : MonoBehaviour
         obstacle.transform.position = position;
         obstacle.transform.parent = gamePlay.GetComponent<Gameplay>().obstacles.transform;
     }
-    //tirer le fond suivant la place du perso
-    public void SuivrePerso()
-    {
-        this.transform.position = new Vector3(this.cameraFollow.transform.position.x, this.cameraFollow.transform.position.y, this.transform.position.z);
-    }
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Camera camera = this.cameraFollow.GetComponent<Camera>();
-        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.transform.position.x + Screen.width, this.cameraFollow.transform.position.y - (Screen.height / 2)));
-        if (perso.plongee) 
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.transform.position.x + Screen.width, Camera.main.transform.position.y - (Screen.height / 2)));
+        if (perso.GetComponent<Perso>().plongee)
         {
-            this.SuivrePerso();
+            timerObstacle -= Time.deltaTime;
+            if (timerObstacle < 0)
+            {
+                print("OBSTACLE CREE");
+                timerObstacle = 0.5f;
+                CreerObstacle();
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ public class Perso : MonoBehaviour
 {
     private bool enDeplacement = false;
     public bool plongee = false;
+    public float deplacementSpeed;
     //Mouvement debut de jeu du perso, se deplace de gauche a droite
     public IEnumerator DeplacementDebut()
     {
@@ -39,5 +40,23 @@ public class Perso : MonoBehaviour
     void Update()
     {
         
+    }
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            enDeplacement = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            enDeplacement = false;
+        }
+        if (enDeplacement)
+        {
+            Vector3 deplacement = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float deplacementX = deplacement.x - transform.position.x;
+            this.transform.Translate(new Vector3(deplacementX, 0, 0));
+            print("touched");
+        }
     }
 }
