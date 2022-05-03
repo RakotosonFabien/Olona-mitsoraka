@@ -13,6 +13,7 @@ public class Perso : MonoBehaviour
     public void TerminerJeu()
     {
         this.enDeplacement = false;
+        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
     //Effet collision
     private void Collision(Obstacle obstacle)

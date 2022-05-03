@@ -13,7 +13,7 @@ public class GenObstacle : MonoBehaviour
     {
         GameObject gamePlay = GameObject.FindGameObjectWithTag("GamePlay");
         GameObject obstacle = Instantiate(obstaclePrefab);
-        Vector2 position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y);
+        Vector3 position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), screenBounds.y, 0);
         obstacle.transform.position = position;
         obstacle.transform.parent = gamePlay.GetComponent<Gameplay>().obstacles.transform;
     }
