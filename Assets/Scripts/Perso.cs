@@ -9,6 +9,13 @@ public class Perso : MonoBehaviour
     public bool plongee = false;
     public float deplacementSpeed;
     public GameObject nbCoups;
+    public GameObject nbOrs;
+    //Ajout or
+    public void AjoutOr()
+    {
+        this.nbOrs.GetComponent<NbOr>().nombreOr++;
+        this.nbOrs.GetComponent<NbOr>().nbOr.GetComponent<Text>().text = System.Convert.ToString(this.nbOrs.GetComponent<NbOr>().nombreOr);
+    }
     //Fin de jeu
     public void TerminerJeu()
     {
@@ -80,6 +87,12 @@ public class Perso : MonoBehaviour
         {
             this.Collision(other.GetComponent<Obstacle>());
             StartCoroutine(other.GetComponent<Obstacle>().Collision(this));
+        }
+        if(other.tag == "Or")
+        {
+            print("DE L'OR DE L'OR");
+            this.AjoutOr();
+            other.GetComponent<Or>().DejaAjoute();
         }
     }
 }

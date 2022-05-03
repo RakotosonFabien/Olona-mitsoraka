@@ -9,6 +9,7 @@ TagManager:
   - GamePlay
   - NbCoup
   - Obstacle
+  - Or
   layers:
   - Default
   - TransparentFX
