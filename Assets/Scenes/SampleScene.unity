@@ -1499,6 +1499,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2156148584316580825, guid: f3dae8a300760644cba054ccf1af84ea, type: 3}
   m_PrefabInstance: {fileID: 2156148584195010917}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1035576678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9037065386183243710, guid: c7bf7a06727ff3547a7a3c2555d74651, type: 3}
+  m_PrefabInstance: {fileID: 9037065386795210254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1116555821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4747338863018238448, guid: dac8fb4fef3e9d648ad248e8ae81ea53, type: 3}
@@ -2012,7 +2017,7 @@ MonoBehaviour:
   ors: []
   objets: []
   nbOr: {fileID: 1824759109}
-  canvasGameOver: {fileID: 0}
+  canvasGameOver: {fileID: 1035576678}
 --- !u!1001 &1674379688
 PrefabInstance:
   m_ObjectHideFlags: 0

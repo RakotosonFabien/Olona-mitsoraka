@@ -10,6 +10,12 @@ public class Perso : MonoBehaviour
     public float deplacementSpeed;
     public GameObject nbCoups;
     public GameObject nbOrs;
+    public int ralentissement = 20;
+    //Changer vitesse de descente
+    public void ChangementVDescente()
+    {
+        this.gameObject.GetComponent<Rigidbody>().drag = ralentissement;
+    }
     //Ajout or
     public void AjoutOr()
     {
@@ -21,6 +27,7 @@ public class Perso : MonoBehaviour
     {
         this.enDeplacement = false;
         this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
     //Effet collision
     private void Collision(Obstacle obstacle)
@@ -50,6 +57,7 @@ public class Perso : MonoBehaviour
     private void Debut()
     {
         GameObject depart = GameObject.FindGameObjectWithTag("Depart");
+        this.ChangementVDescente();
         depart.SetActive(false);
     }
     // Start is called before the first frame update
@@ -78,6 +86,7 @@ public class Perso : MonoBehaviour
         {
             Vector3 deplacement = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float deplacementX = deplacement.x - transform.position.x;
+            print("XXXXXX " + transform.position.x);
             this.transform.Translate(new Vector3(deplacementX, 0, 0));
         }
     }
@@ -90,7 +99,6 @@ public class Perso : MonoBehaviour
         }
         if(other.tag == "Or")
         {
-            print("DE L'OR DE L'OR");
             this.AjoutOr();
             other.GetComponent<Or>().DejaAjoute();
         }
