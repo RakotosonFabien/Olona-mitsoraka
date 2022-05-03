@@ -8,6 +8,12 @@ public class Perso : MonoBehaviour
     private bool enDeplacement = false;
     public bool plongee = false;
     public float deplacementSpeed;
+    public GameObject nbCoups;
+    //Effet collision
+    private void Collision(Obstacle obstacle)
+    {
+        this.nbCoups.GetComponent<NbCoup>().SimpleDegat();
+    }
     //Mouvement debut de jeu du perso, se deplace de gauche a droite
     public IEnumerator DeplacementDebut()
     {
@@ -56,7 +62,15 @@ public class Perso : MonoBehaviour
             Vector3 deplacement = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float deplacementX = deplacement.x - transform.position.x;
             this.transform.Translate(new Vector3(deplacementX, 0, 0));
-            print("touched");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Obstacle")
+        {
+            print("OBSTACLE TOUCHEE");
+            this.Collision(other.GetComponent<Obstacle>());
+            StartCoroutine(other.GetComponent<Obstacle>().Collision(this));
         }
     }
 }
