@@ -12,7 +12,14 @@ public class Gameplay : MonoBehaviour
     public GameObject[] ors;
     public GameObject[] objets;
     public GameObject nbOr;
-
+    public GameObject canvasGameOver;
+    //GameOverAction
+    public void GameOver()
+    {
+        this.perso.GetComponent<Perso>().TerminerJeu();
+        this.cameraFollow.GetComponent<CameraFollow>().stop = true;
+        canvasGameOver.SetActive(true);
+    }
     // Start is called before the first frame update
     void Start()
     {

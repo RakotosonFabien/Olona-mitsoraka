@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    public bool stop = false;
     public SpriteRenderer fond;
     public Transform target;
     public Vector3 offset;
@@ -19,6 +20,9 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(0, target.position.y, 0) + offset + premiereDistance;
+        if (!stop)
+        {
+            transform.position = new Vector3(0, target.position.y, 0) + offset + premiereDistance;
+        }
     }
 }

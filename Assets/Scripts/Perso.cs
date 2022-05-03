@@ -9,10 +9,19 @@ public class Perso : MonoBehaviour
     public bool plongee = false;
     public float deplacementSpeed;
     public GameObject nbCoups;
+    //Fin de jeu
+    public void TerminerJeu()
+    {
+        this.enDeplacement = false;
+    }
     //Effet collision
     private void Collision(Obstacle obstacle)
     {
         this.nbCoups.GetComponent<NbCoup>().SimpleDegat();
+        if(this.nbCoups.GetComponent<NbCoup>().nbCoups == 0)
+        {
+            GameObject.FindGameObjectWithTag("GamePlay").GetComponent<Gameplay>().GameOver();
+        }
     }
     //Mouvement debut de jeu du perso, se deplace de gauche a droite
     public IEnumerator DeplacementDebut()
@@ -68,7 +77,6 @@ public class Perso : MonoBehaviour
     {
         if(other.tag == "Obstacle")
         {
-            print("OBSTACLE TOUCHEE");
             this.Collision(other.GetComponent<Obstacle>());
             StartCoroutine(other.GetComponent<Obstacle>().Collision(this));
         }

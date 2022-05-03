@@ -32,7 +32,6 @@ public class GenObstacle : MonoBehaviour
             timerObstacle -= Time.deltaTime;
             if (timerObstacle < 0)
             {
-                print("OBSTACLE CREE");
                 timerObstacle = 0.5f;
                 CreerObstacle();
             }
