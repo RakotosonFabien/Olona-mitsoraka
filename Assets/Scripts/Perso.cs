@@ -1,0 +1,106 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Perso : MonoBehaviour
+{
+    private bool enDeplacement = false;
+    public bool plongee = false;
+    public float deplacementSpeed;
+    public GameObject nbCoups;
+    public GameObject nbOrs;
+    public int ralentissement = 20;
+    //Changer vitesse de descente
+    public void ChangementVDescente()
+    {
+        this.gameObject.GetComponent<Rigidbody>().drag = ralentissement;
+    }
+    //Ajout or
+    public void AjoutOr()
+    {
+        this.nbOrs.GetComponent<NbOr>().nombreOr++;
+        this.nbOrs.GetComponent<NbOr>().nbOr.GetComponent<Text>().text = System.Convert.ToString(this.nbOrs.GetComponent<NbOr>().nombreOr);
+    }
+    //Fin de jeu
+    public void TerminerJeu()
+    {
+        this.enDeplacement = false;
+        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+    }
+    //Effet collision
+    private void Collision(Obstacle obstacle)
+    {
+        this.nbCoups.GetComponent<NbCoup>().SimpleDegat();
+        if(this.nbCoups.GetComponent<NbCoup>().nbCoups == 0)
+        {
+            GameObject.FindGameObjectWithTag("GamePlay").GetComponent<Gameplay>().GameOver();
+        }
+    }
+    //Mouvement debut de jeu du perso, se deplace de gauche a droite
+    public IEnumerator DeplacementDebut()
+    {
+        GameObject textGO = GameObject.FindGameObjectWithTag("CompteDebutJeu");
+        Text texte = textGO.GetComponent<Text>();
+        texte.text = "3";
+        yield return new WaitForSeconds(1f);
+        texte.text = "2";
+        yield return new WaitForSeconds(1f);
+        texte.text = "1";
+        yield return new WaitForSeconds(1f);
+        textGO.SetActive(false);
+        Debut();
+        plongee = true;
+    }
+    //Jouer animation de plongeon atao rehefa premiere click ecran de go
+    private void Debut()
+    {
+        GameObject depart = GameObject.FindGameObjectWithTag("Depart");
+        this.ChangementVDescente();
+        depart.SetActive(false);
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+       // StartCoroutine(DeplacementDebut());
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            enDeplacement = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            enDeplacement = false;
+        }
+        if (enDeplacement)
+        {
+            Vector3 deplacement = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float deplacementX = deplacement.x - transform.position.x;
+            print("XXXXXX " + transform.position.x);
+            this.transform.Translate(new Vector3(deplacementX, 0, 0));
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Obstacle")
+        {
+            this.Collision(other.GetComponent<Obstacle>());
+            StartCoroutine(other.GetComponent<Obstacle>().Collision(this));
+        }
+        if(other.tag == "Or")
+        {
+            this.AjoutOr();
+            other.GetComponent<Or>().DejaAjoute();
+        }
+    }
+}
