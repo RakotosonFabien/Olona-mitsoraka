@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraJeu : MonoBehaviour
 {
-    public bool stop = false;
+    [Header("Game Objects")]
     public SpriteRenderer fond;
     public Transform target;
+    
+    [Header("Variables")]
+    public bool stop = false;
     public Vector3 offset;
-    public Vector3 premiereDistance;
+    private Vector3 premiereDistance;
+
+    public void StopFollowing(bool value) => this.stop = value;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -11,16 +11,4 @@ public class Obstacle : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GameObject.Destroy(this.gameObject);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    //gerena le toucher ecran
-    void Update()
-    {
-        
-    }
 }
