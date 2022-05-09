@@ -12,7 +12,9 @@ public class Perso : MonoBehaviour
     private bool enDeplacement = false;
     public bool plongee = false;
     public int ralentissement = 20;
-
+    public void Start()
+    {
+    }
     //Jouer animation de plongeon atao rehefa premiere click ecran de go
     public void DebutDeplacement()
     {
@@ -35,7 +37,9 @@ public class Perso : MonoBehaviour
     {
         this.gameObject.GetComponent<Rigidbody>().drag = ralentissement;
     }
-
+    private void Update()
+    {
+    }
     private void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
